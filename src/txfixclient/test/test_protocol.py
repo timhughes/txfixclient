@@ -56,7 +56,7 @@ class FixTagReceiverTests(TestCase):
         t = proto_helpers.StringIOWithoutClosing()
         a = FixTagReceiverTester()
         a.makeConnection(protocol.FileWrapper(t))
-        for i in range(0, len(self.fix_buffers)):
+        for i in range(len(self.fix_buffers)):
             a.dataReceived(self.fix_buffers[i])
 
             self.assertEqual(self.output[i], a.tags)
@@ -101,7 +101,7 @@ class LongTagLengthTests(TestCase):
         t = proto_helpers.StringIOWithoutClosing()
         a = LongTagLengthTester()
         a.makeConnection(protocol.FileWrapper(t))
-        for i in range(0, len(self.fix_buffers)):
+        for i in range(len(self.fix_buffers)):
             a.dataReceived(self.fix_buffers[i])
             self.assertEqual(self.output[i], a.longTags)
 

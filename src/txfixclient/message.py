@@ -21,13 +21,8 @@ class FixMessage(object):
 
     def get_tag(self, id):
         '''take a tag id and returns a list of tags of that id'''
-        tags = []
-
         id = int(id)
-        for tag in self._data:
-            if tag[0] is id:
-                tags.append(tag)
-        return tags
+        return [tag for tag in self._data if tag[0] is id]
 
     def append_tag(self, id, val):
 
@@ -75,9 +70,9 @@ class FixMessage(object):
             v = tag[1]
             if k in [8, 9, 10]:
                 continue
-            msg_str = msg_str + self._tag_to_string(k, v)
+            msg_str += self._tag_to_string(k, v)
         self.length = len(msg_str)
-        for i in range(0, len(self._data)):
+        for i in range(len(self._data)):
             if self._data[i][0] is 9:
                 self._data[i] = (9, str(self.length))
 
@@ -90,13 +85,13 @@ class FixMessage(object):
             if k in [8, 9, 10]:
                 meta[k] = v
                 continue
-            msg_str = msg_str + self._tag_to_string(k, v)
+            msg_str += self._tag_to_string(k, v)
         self._update_length()
         meta[9] = self.length  # set BodyLength
         msg_str = self._tag_to_string(8, meta[8]) + \
             self._tag_to_string(9, meta[9]) + msg_str
         meta[10] = self.calc_checksum()
-        msg_str = msg_str + self._tag_to_string(10, meta[10])
+        msg_str += self._tag_to_string(10, meta[10])
         return msg_str
 
     def calc_checksum(self):

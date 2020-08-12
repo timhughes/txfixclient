@@ -46,7 +46,7 @@ class FixClientService(service.Service):
         self._seqnum = itertools.count(1)
         self._test_request_id = itertools.count(1)
         self.testreq_loop = None
-        self.test_requests = dict()
+        self.test_requests = {}
         self.version = self.spec.root.attrib
         self.BeginString = '.'.join([
             self.version['type'],
@@ -75,7 +75,7 @@ class FixClientService(service.Service):
 
         self._seqnum = itertools.count(1)
         self._test_request_id = itertools.count(1)
-        self.test_requests = dict()
+        self.test_requests = {}
         self.stats = OrderedDict({
             'msg_tx_count': 0,
             'msg_rx_count': 0,
