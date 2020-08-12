@@ -36,8 +36,7 @@ def _message_header(client, msgtype):
         SendingTime,
     ]
     header_tags = [int(client.spec.get_field_by_name(header['name']).attrib['number']) for header in client.spec.list_header_required('Y')]
-    msg_header = zip(header_tags, header_vals)
-    return msg_header
+    return zip(header_tags, header_vals)
 
 
 

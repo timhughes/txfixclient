@@ -31,9 +31,8 @@ class Spec(object):
     def search_components(self, component, attrib, query):
         if self.root is None:
             raise Exception('spec not loaded')
-        result = (item for item in self.root.find(component)
+        return (item for item in self.root.find(component)
                   if item.attrib[attrib] == query).next()
-        return result
 
     def get_field_by_num(self, num):
         return self.search_components('fields', 'number', str(num))
@@ -53,8 +52,7 @@ class Spec(object):
     def list_components(self, component):
         if self.root is None:
             raise Exception('spec not loaded')
-        result = [item for item in self.root.find(component)]
-        return result
+        return [item for item in self.root.find(component)]
 
     def list_fields(self):
         return self.list_components('fields')

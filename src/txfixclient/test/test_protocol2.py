@@ -93,8 +93,8 @@ class FixMessageReceiverTestCase(unittest.TestCase):
             b'10=110',
         ]
 
-        for i in range(0, len(fix_tags)):
-            self.proto.tagReceived(fix_tags[i])
+        for fix_tag in fix_tags:
+            self.proto.tagReceived(fix_tag)
 
         self.assertEqual(len(self.proto.messages), 1)
 

@@ -71,7 +71,7 @@ class FixMessageTests(TestCase):
             b'553=username\x01',
             b'554=$ecretP4ass\x01',
         ]
-        for i in range(0, len(tags)):
+        for i in range(len(tags)):
             self.assertEqual(self.msg._tag_to_string(tags[i][0], tags[i][1]), results[i])
 
         self.assertEqual(self.msg._tag_to_string(8, 'FIX.4.4'), b'8=FIX.4.4\x01')
